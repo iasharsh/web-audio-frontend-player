@@ -75,6 +75,8 @@ async function getSongs(folder) {
 function playMusic(track, pause = false) {
     if (!track) return;
 
+    if (!pause) activatePlayerUI();
+
     currentSongName = track;
     currentSong.src = `songs/${currfolder}/${encodeURIComponent(track)}`;
 
@@ -83,12 +85,10 @@ function playMusic(track, pause = false) {
         play.src = "img/pause.svg";
     }
 
-    document.querySelector(".songinfo").innerText =
-        cleanSongName(track);
-
-    document.querySelector(".songtime").innerText = "00:00 / 00:00";
-    console.log("Playing:", currentSong.src);
+    document.querySelector(".songinfo").innerText = cleanSongName(track);
 }
+
+
 
 
 /* ================= SEEK BAR ================= */
@@ -139,6 +139,16 @@ seekbar.addEventListener("click", e => {
     const percent = e.offsetX / seekbar.clientWidth;
     currentSong.currentTime = percent * currentSong.duration;
 });
+
+function activatePlayerUI() {
+    // show playbar
+    document.querySelector(".playbar").classList.add("active");
+
+    // show Your Library section
+    document.querySelector(".library").classList.add("active");
+}
+
+
 
 /* ================= ALBUMS ================= */
 async function displayAlbums() {
@@ -233,8 +243,8 @@ async function renderCurrentSection() {
 
 /* ================= MAIN ================= */
 async function main() {
-    songs = await getSongs("c1");
-    playMusic(songs[0], true);
+    // songs = await getSongs("c1");
+    // playMusic(songs[0], true);
     await loadSections();
     renderCurrentSection();
 

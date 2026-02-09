@@ -123,7 +123,7 @@ body {
     scroll-behavior: smooth;
     /* height: calc(100vh - 340px);  */
     height: calc(100vh - 260px); 
-    max-height: 60vh;
+    max-height: 70vh;
     /* Add this for custom scrollbar */
     scrollbar-width: thin;
     /* For Firefox */
@@ -241,7 +241,16 @@ body {
     width: 70vw;
     height: 40px;
     padding: 16px 12px 30px;
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
 
+.playbar.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .songbuttons {
@@ -468,9 +477,9 @@ body {
         margin: 0;
     }
 
-    .card .play{
+    /* .card .play{
         bottom: -160px;
-    }
+    } */
     .playbar {
         width: calc(100vw - 30px);
         margin: -5px;
@@ -515,9 +524,22 @@ body {
     .cardContainer {
         margin: 0;
         justify-content: center;
+        max-height: 80vh;
     }
     .spotifyfooter {
         padding-bottom: 220px; /* footer fully visible above playbar */
+    }
+
+    /* .circle{
+        display: block;
+        top: -33px;
+        opacity: 1;
+    } */
+    .play {
+        top: auto !important;
+        bottom: 100px;
+        right: 20px;
+        opacity: 1;
     }
 }
 
